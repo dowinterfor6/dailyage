@@ -1,0 +1,60 @@
+{
+    "Naval Arena: Stillwater Gulf": 
+    {
+        "Duration": 60,
+        "Type": "Daily",
+        "Times": {
+            "1": [0, 1],
+            "2": [13, 14],
+            "3": [20, 21]
+        }
+    },
+    "Golden Plains Battle":
+    {
+        "Duration": 20,
+        "Type": "Daily",
+        "Times": {
+            "1": [1.5, 2.5],
+            "2": [16, 17]
+        }
+    },
+    "Red Dragon's Keep":
+    {
+        "Duration": 60,
+        "Type": "Weekly",
+        "Times": {
+            "Mon": [1, 2],
+            "Mon": [15.5, 16.5],
+            "Tue": [1, 2],
+            "Wed": [15.5, 16.5],
+            "Thu": [1, 2],
+            "Fri": [15.5, 16.5],
+            "Sat": [1, 2],
+            "Sun": [15.5, 16.5]
+        }
+    },
+    "The Fall of Hiram City":
+    {
+        "Duration": 21,
+        "Type": "Daily",
+        "Times": {
+            "1": [0, 4],
+            "2": [14, 16]
+        }
+    },
+    "Kadum":
+    {
+        "Duration": 60,
+        "Type": "Weekly",
+        "Times": {
+            "Mon": [1, 2],
+            "Tue": [15.5, 16.5],
+            "Wed": [1, 2],
+            "Thu": [15.5, 16.5],
+            "Fri": [1, 2],
+            "Sat": [15.5, 16.5],
+            "Sun": [1, 2],
+            "Sun": [15.5, 16.5]
+        }
+    },
+}

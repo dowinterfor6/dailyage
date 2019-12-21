@@ -1,0 +1,10 @@
+{
+    "name": "Dailyage",
+    "version": "1.0.0",
+    "description": "I can't remember when all the dailies happen",
+    "main": "dailyage.js",
+    "author": "do\"winter\"for6",
+    "dependencies": {
+        "discord.js": "^11.5.1"
+    }
+}
