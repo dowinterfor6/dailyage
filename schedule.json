@@ -1,60 +1,200 @@
 {
     "Naval Arena: Stillwater Gulf": 
     {
-        "Duration": 60,
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 1,
         "Type": "Daily",
+        "Status": false,
         "Times": {
-            "1": [0, 1],
-            "2": [13, 14],
-            "3": [20, 21]
+            "1": [0],
+            "2": [13],
+            "3": [20]
         }
     },
     "Golden Plains Battle":
     {
-        "Duration": 20,
+        "Activity Duration (mins)": 20,
+        "Opening Duration": 1,
         "Type": "Daily",
+        "Status": true,
         "Times": {
-            "1": [1.5, 2.5],
-            "2": [16, 17]
+            "1": [1.5],
+            "2": [16]
         }
     },
     "Red Dragon's Keep":
     {
-        "Duration": 60,
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 1,
         "Type": "Weekly",
+        "Status": true,
         "Times": {
-            "Mon": [1, 2],
-            "Mon": [15.5, 16.5],
-            "Tue": [1, 2],
-            "Wed": [15.5, 16.5],
-            "Thu": [1, 2],
-            "Fri": [15.5, 16.5],
-            "Sat": [1, 2],
-            "Sun": [15.5, 16.5]
+            "Mon": [1, 15.5],
+            "Tue": [1],
+            "Wed": [15.5],
+            "Thu": [1],
+            "Fri": [15.5],
+            "Sat": [1],
+            "Sun": [15.5]
         }
     },
-    "The Fall of Hiram City":
+    "The Fall of Hiram City TODO:howthefuckdoidothis":
     {
-        "Duration": 21,
+        "Activity Duration (mins)": 21,
+        "Opening Duration": 4,
         "Type": "Daily",
+        "Status": true,
         "Times": {
-            "1": [0, 4],
-            "2": [14, 16]
+            "1": [0],
+            "2": [14]
         }
     },
     "Kadum":
     {
-        "Duration": 60,
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 1,
         "Type": "Weekly",
+        "Status": true,
         "Times": {
-            "Mon": [1, 2],
-            "Tue": [15.5, 16.5],
-            "Wed": [1, 2],
-            "Thu": [15.5, 16.5],
-            "Fri": [1, 2],
-            "Sat": [15.5, 16.5],
-            "Sun": [1, 2],
-            "Sun": [15.5, 16.5]
+            "Mon": [1],
+            "Tue": [15.5],
+            "Wed": [1],
+            "Thu": [15.5],
+            "Fri": [1],
+            "Sat": [15.5],
+            "Sun": [1, 15.5]
+        }
+    },
+    "Delphinad Ghost Ships":
+    {
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 1,
+        "Type": "Daily",
+        "Status": false,
+        "Times": {
+
+        }
+    },
+    "Kraken":
+    {
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 1,
+        "Type": "Daily",
+        "Status": false,
+        "Times": {
+
+        }
+    },
+    "Leviathan":
+    {
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 1,
+        "Type": "Daily",
+        "Status": false,
+        "Times": {
+
+        }
+    },
+    "Black Dragon":
+    {
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 1,
+        "Type": "Daily",
+        "Status": false,
+        "Times": {
+
+        }
+    },
+    "Mirage Isle Fish Fest":
+    {
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 12,
+        "Type": "Weekly",
+        "Status": true,
+        "Times": {
+            "Sat": [17]
+        }
+    },
+    "Abyssal Attack":
+    {
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 1,
+        "Type": "Weekly",
+        "Status": true,
+        "Times": {
+            "Tue": [22.5],
+            "Thu": [22.5],
+            "Sat": [22.5]
+        }
+    },
+    "Lusca Awakening":
+    {
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 1,
+        "Type": "Daily",
+        "Status": true,
+        "Times": {
+            "1": [23]
+        }
+    },
+    "Daily Reset":
+    {
+        "Activity Duration (mins)": 0,
+        "Opening Duration": 0,
+        "Type": "Daily",
+        "Status": true,
+        "Times": {
+            "1": [0]
+        }
+    },
+    "Archepass Reset":
+    {
+        "Activity Duration (mins)": 0,
+        "Opening Duration": 0,
+        "Type": "Weekly",
+        "Status": true,
+        "Times": {
+            "Sun": [0]
+        }
+    },
+    "Castle Siege":
+    {
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 1,
+        "Type": "Weekly",
+        "Status": true,
+        "Times": {
+            "Wed": [21]
+        }
+    },
+    "Crimson Rift - Mainland":
+    {
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 1,
+        "Type": "In Game",
+        "Status": true,
+        "Times": {
+            "1": [12]
+        }
+    },
+    "Crimson Rift - Sungold":
+    {
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 1,
+        "Type": "In Game",
+        "Status": true,
+        "Times": {
+            "1": [18]
+        }
+    },
+    "Grimghast Rift":
+    {
+        "Activity Duration (mins)": 60,
+        "Opening Duration": 1,
+        "Type": "In Game",
+        "Status": true,
+        "Times": {
+            "1": [0]
         }
     },
 }
