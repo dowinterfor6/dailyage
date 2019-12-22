@@ -277,4 +277,3 @@ const formatTimePlurals = (value, unit) => {
       return value + ' ' + unit + 's';
   };
 }
-// TODO where tf did my 30 mins go
