@@ -192,6 +192,7 @@ const dataReducer = eventName => {
 const formatData = (event, type) => {
   let output = `\n${event["Name"]}\`\`\``;
   let timesDisplay = [];
+
   switch (type) {
     case "Weekly":
       for (let [day, times] of Object.entries(event["Times"])) {
@@ -207,5 +208,28 @@ const formatData = (event, type) => {
       // TODO
       break;
   }
-  return output + timesDisplay.join('\n') + '\`\`\`';
+
+  let nextEventTime = findNextEvent(event, type);
+
+  return output + timesDisplay.join('\n') + '\`\`\`\n' + `Next ${event["Name"]} in ` + nextEventTime;
+}
+
+const findNextEvent = (event, type) => {
+  let nextEventDetail;
+  let currentDate = new Date();
+  let currentHour = currentDate.getUTCHours() + (currentDate.getUTCMinutes() / 60);
+
+  switch(type) {
+    case "Weekly":
+      break;
+    case "Daily":
+      let timeDifference = event["Times"].map(time => 24 - (currentHour - time));
+      let nextEventTime = Math.min(...timeDifference);
+      let nextEventHour = Math.floor(nextEventTime);
+      let nextEventMinute = (nextEventTime - nextEventHour) * 60;
+      nextEventDetail = nextEventHour + ' hours ' + (nextEventMinute === 0 ? '' : Math.round(nextEventMinute) + ' minutes');
+      return nextEventDetail;
+    case "InGame":
+      break;
+  }
 }
