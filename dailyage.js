@@ -35,7 +35,6 @@ client.on('message', msg => {
       msg.channel.send('Use !schedule to see the schedule!');
       break;
     default: 
-      // TODO regex check 
       let redDragonKeep = /^![r|R]ed.*[d|D]rag.*?$/;
       let kadum = /^![k|K]adum.*?$/;
       let fishFest = /^![M|m]irage.*[I|i]sle.*[F|f]ish.*[F|f]est.*?$|^![F|f]ish.*[F|f]est.*?$/;
