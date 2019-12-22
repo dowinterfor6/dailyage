@@ -223,10 +223,17 @@ const findNextEvent = (event, type) => {
     case "Weekly":
       break;
     case "Daily":
-      let timeDifference = event["Times"].map(time => 24 - (currentHour - time));
-      let nextEventTime = Math.min(...timeDifference);
-      let nextEventHour = Math.floor(nextEventTime);
-      let nextEventMinute = (nextEventTime - nextEventHour) * 60;
+      let nextEventTimeArr = event["Times"].filter(time => time > currentHour);
+      let nextEventTimeDifference;
+
+      if (nextEventTimeArr.length === 0) {
+        nextEventTimeDifference = 24 - currentHour + event["Times"][0];
+      } else {
+        nextEventTimeDifference = eventTimeArr[0] - currentHour;
+      }
+
+      let nextEventHour = Math.floor(nextEventTimeDifference);
+      let nextEventMinute = (nextEventTimeDifference - nextEventHour) * 60;
       nextEventDetail = nextEventHour + ' hours ' + (nextEventMinute === 0 ? '' : Math.round(nextEventMinute) + ' minutes');
       return nextEventDetail;
     case "InGame":
