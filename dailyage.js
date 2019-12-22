@@ -11,7 +11,8 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-    if (msg.content === '!schedule') {
+  switch(msg.content) {
+    case '!schedule': 
       let discordDisplay = new Display();
       let weeklyEventNames = Object.keys(weeklies);
 
@@ -25,8 +26,12 @@ client.on('message', msg => {
         discordDisplay.add(dailies[eventName], 'Daily');
       })
 
-      msg.channel.send(discordDisplay.show())
-    }
+      msg.channel.send(discordDisplay.show());
+      break;
+    case '!help':
+      msg.channel.send('Use !schedule to see the schedule!');
+      break;
+  }   
 });
 
 client.login(auth.token);
