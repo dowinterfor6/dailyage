@@ -1,4 +1,5 @@
 const weeklies = require('./data/weeklies.json');
+const dailies = require('./data/dailies.json');
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -11,14 +12,21 @@ client.on('ready', () => {
 
 client.on('message', msg => {
     if (msg.content === '!schedule') {
-      let weeklyDisplay = new Display();
+      let discordDisplay = new Display();
       let weeklyEventNames = Object.keys(weeklies);
 
       weeklyEventNames.forEach(eventName => {
-        weeklyDisplay.add(weeklies[eventName]);
+        discordDisplay.add(weeklies[eventName], 'Weekly');
+      });
+
+      let dailyEventNames = Object.keys(dailies);
+
+      dailyEventNames.forEach(eventName => {
+        discordDisplay.add(dailies[eventName], 'Daily');
       })
 
-      msg.reply(weeklyDisplay.print());
+
+      msg.reply(discordDisplay.show());
     }
 });
 
@@ -37,28 +45,44 @@ class Display {
     }
   }
 
-  add(event) {
+  add(event, type) {
     if (event["Status"]) {
       let eventName = event["Name"];
-      for (let [day, hours] of Object.entries(event["Times"])) {
-        for (let hour of hours) {
-          // console.log(eventName + "@ " + day + "@ " + hour);
-          if (Object.keys(this.state[day]).includes(hour)) {
-            this.state[day][hour].push(eventName);
-          } else {
-            this.state[day][hour] = [eventName];
+
+      if (type === "Weekly") {
+        for (let [day, hours] of Object.entries(event["Times"])) {
+          for (let hour of hours) {
+            let formattedTime = this.formatTime(hour);
+            if (Object.keys(this.state[day]).includes(formattedTime)) {
+              this.state[day][formattedTime].push(eventName);
+            } else {
+              this.state[day][formattedTime] = [eventName];
+            }
           }
         }
+      } else if (type === "Daily") {
+        for (let hour of event["Times"]) {
+          let formattedTime = this.formatTime(hour);
+          for (let [day, hours] of Object.entries(this.state)) {
+            if (Object.keys(hours).includes(formattedTime)) {
+              this.state[day][formattedTime].push(eventName);
+            } else {
+              this.state[day][formattedTime] = [eventName];
+            }
+          }
+        }
+      } else {
+        console.log('How did i get here lmao');
       }
     }
   }
 
-  print() {
+  show() {
     let output = [];
     for (let [day, schedule] of Object.entries(this.state)) {      
       let scheduleDisplay = `\n${day}\`\`\``;
       for (let [time, event] of Object.entries(schedule)) {
-        scheduleDisplay += time + ' ' + event.join(', ') + '\n';
+        scheduleDisplay += time + ' ' + event.join('\n     ') + '\n';
       }
       scheduleDisplay += '```';
 
@@ -66,5 +90,30 @@ class Display {
     }
 
     return output.join('');
+  }
+
+  formatTime(inputHour) {
+    let formattedDate = '';
+
+    let hour = Math.floor(inputHour);
+    let minutes = 60 * inputHour % hour;
+
+    if (hour < 10) {
+      formattedDate += '0' + hour;
+    } else {
+      formattedDate += hour;
+    }
+
+    if (minutes > 0) {
+      if (minutes < 10) {
+        formattedDate += '0' + minutes;
+      } else {
+        formattedDate += minutes;
+      }
+    } else {
+      formattedDate += '00';
+    }
+    
+    return formattedDate;
   }
 }

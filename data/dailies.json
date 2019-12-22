@@ -1,6 +1,7 @@
 {
     "Naval Arena: Stillwater Gulf": 
     {
+        "Name": "Naval Arena: Stillwater Gulf",
         "Activity Duration (mins)": 60,
         "Opening Duration": 1,
         "Status": false,
@@ -8,6 +9,7 @@
     },
     "Golden Plains Battle":
     {
+        "Name": "Golden Plains Battle",
         "Activity Duration (mins)": 20,
         "Opening Duration": 1,
         "Status": true,
@@ -15,6 +17,7 @@
     },
     "The Fall of Hiram City TODO:howthefuckdoidothis":
     {
+        "Name": "The Fall of Hiram City",
         "Activity Duration (mins)": 21,
         "Opening Duration": 4,
         "Status": true,
@@ -22,6 +25,7 @@
     },
     "Delphinad Ghost Ships":
     {
+        "Name": "Delphinad Ghost Ships",
         "Activity Duration (mins)": 60,
         "Opening Duration": 1,
         "Status": false,
@@ -29,6 +33,7 @@
     },
     "Lusca Awakening":
     {
+        "Name": "Lusca Awakening",
         "Activity Duration (mins)": 60,
         "Opening Duration": 1,
         "Status": true,
@@ -36,6 +41,7 @@
     },
     "Daily Reset":
     {
+        "Name": "Daily Reset",
         "Activity Duration (mins)": 0,
         "Opening Duration": 0,
         "Status": true,
