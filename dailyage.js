@@ -157,7 +157,7 @@ const formatTime = inputHour => {
   let formattedDate = '';
 
   let hour = Math.floor(inputHour);
-  let minutes = 60 * inputHour % hour;
+  let minutes = 60 * (inputHour % hour);
 
   if (hour < 10) {
     formattedDate += '0' + hour;
@@ -215,28 +215,66 @@ const formatData = (event, type) => {
 }
 
 const findNextEvent = (event, type) => {
-  let nextEventDetail;
+  let nextEventDetail = [], 
+    nextEventTimeArr, 
+    nextEventTimeDifference, 
+    nextEventHour, 
+    nextEventMinute;
   let currentDate = new Date();
   let currentHour = currentDate.getUTCHours() + (currentDate.getUTCMinutes() / 60);
+  let currentDay = currentDate.getUTCDay();
 
   switch(type) {
     case "Weekly":
-      break;
+      let daysArr = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+      let tryNextDay = currentDay;
+
+      nextEventTimeArr = event["Times"][daysArr[currentDay]];
+
+      if (nextEventTimeArr && nextEventTimeArr.filter(time => time > currentHour).length > 0) {
+        nextEventTimeDifference = event["Times"][0] - currentHour;
+      } else {
+        tryNextDay++;
+        while (!event["Times"][daysArr[tryNextDay % 7]]) {
+          tryNextDay++;
+        };
+        nextEventTimeDifference = (currentHour > event["Times"][daysArr[tryNextDay % 7]][0]) ? (24 - currentHour + event["Times"][daysArr[tryNextDay % 7]][0]) : (event["Times"][daysArr[tryNextDay % 7]][0] - currentHour);
+      }
+
+      nextEventHour = Math.floor(nextEventTimeDifference);
+      nextEventMinute = (nextEventTimeDifference - nextEventHour) * 60;
+      nextEventDetail.push(formatTimePlurals(tryNextDay - currentDay, 'day'));
+      nextEventDetail.push(formatTimePlurals(nextEventHour, 'hour'));
+      nextEventDetail.push(formatTimePlurals(Math.round(nextEventMinute), 'minute'))
+
+      return nextEventDetail.join(' ');
     case "Daily":
-      let nextEventTimeArr = event["Times"].filter(time => time > currentHour);
-      let nextEventTimeDifference;
+      nextEventTimeArr = event["Times"].filter(time => time > currentHour);
 
       if (nextEventTimeArr.length === 0) {
         nextEventTimeDifference = 24 - currentHour + event["Times"][0];
       } else {
-        nextEventTimeDifference = eventTimeArr[0] - currentHour;
+        nextEventTimeDifference = event["Times"][0] - currentHour;
       }
 
-      let nextEventHour = Math.floor(nextEventTimeDifference);
-      let nextEventMinute = (nextEventTimeDifference - nextEventHour) * 60;
-      nextEventDetail = nextEventHour + ' hours ' + (nextEventMinute === 0 ? '' : Math.round(nextEventMinute) + ' minutes');
-      return nextEventDetail;
+      nextEventHour = Math.floor(nextEventTimeDifference);
+      nextEventMinute = (nextEventTimeDifference - nextEventHour) * 60;
+      nextEventDetail.push(formatTimePlurals(nextEventHour, 'hour'));
+      nextEventDetail.push(formatTimePlurals(Math.round(nextEventMinute), 'minute'))
+      return nextEventDetail.join(' ');
     case "InGame":
       break;
   }
 }
+
+const formatTimePlurals = (value, unit) => {
+  switch(value) {
+    case 1:
+      return value + ' ' + unit;
+    case 0:
+      return '';
+    default:
+      return value + ' ' + unit + 's';
+  };
+}
+// TODO where tf did my 30 mins go
