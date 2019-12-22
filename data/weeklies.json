@@ -1,7 +1,7 @@
-export default
 {
-    "Red Dragon's Keep":
+    "1":
     {
+        "Name": "Red Dragon's Keep",
         "Activity Duration (mins)": 60,
         "Opening Duration": 1,
         "Status": true,
@@ -15,8 +15,9 @@ export default
             "Sun": [15.5]
         }
     },
-    "Kadum":
+    "2":
     {
+        "Name": "Kadum",
         "Activity Duration (mins)": 60,
         "Opening Duration": 1,
         "Status": true,
@@ -30,8 +31,9 @@ export default
             "Sun": [1, 15.5]
         }
     },
-    "Kraken":
+    "3":
     {
+        "Name": "Kraken",
         "Activity Duration (mins)": 60,
         "Opening Duration": 1,
         "Status": false,
@@ -39,8 +41,9 @@ export default
 
         }
     },
-    "Leviathan":
+    "4":
     {
+        "Name": "Leviathan",
         "Activity Duration (mins)": 60,
         "Opening Duration": 1,
         "Status": false,
@@ -48,8 +51,9 @@ export default
 
         }
     },
-    "Black Dragon":
+    "5":
     {
+        "Name": "Black Dragon",
         "Activity Duration (mins)": 60,
         "Opening Duration": 1,
         "Status": false,
@@ -57,8 +61,9 @@ export default
 
         }
     },
-    "Mirage Isle Fish Fest":
+    "6":
     {
+        "Name": "Mirage Isle Fish Fest",
         "Activity Duration (mins)": 60,
         "Opening Duration": 12,
         "Status": true,
@@ -66,8 +71,9 @@ export default
             "Sat": [17]
         }
     },
-    "Abyssal Attack":
+    "7":
     {
+        "Name": "Abyssal Attack",
         "Activity Duration (mins)": 60,
         "Opening Duration": 1,
         "Status": true,
@@ -77,8 +83,9 @@ export default
             "Sat": [22.5]
         }
     },
-    "Archepass Reset":
+    "8":
     {
+        "Name": "Archepass Reset",
         "Activity Duration (mins)": 0,
         "Opening Duration": 0,
         "Status": true,
@@ -86,8 +93,9 @@ export default
             "Sun": [0]
         }
     },
-    "Castle Siege":
+    "9":
     {
+        "Name": "Castle Siege",
         "Activity Duration (mins)": 60,
         "Opening Duration": 1,
         "Status": true,
