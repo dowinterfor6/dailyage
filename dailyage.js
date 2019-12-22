@@ -36,6 +36,44 @@ client.on('message', msg => {
       break;
     default: 
       // TODO regex check 
+      let redDragonKeep = /^![r|R]ed.*[d|D]rag.*?$/;
+      let kadum = /^![k|K]adum.*?$/;
+      let fishFest = /^![M|m]irage.*[I|i]sle.*[F|f]ish.*[F|f]est.*?$|^![F|f]ish.*[F|f]est.*?$/;
+      let abyssal = /^![A|a]byssal.*?$|![A|a][A|a].*?$/;
+      let archepassReset = /^!.*[P|p]ass.*[R|r]eset.*?$/;
+      let castleSiege = /^![C|c]astle.*?$/;
+      let halcy = /^![H|h]alcy.*?$|![G|g]old.*[P|p]lain.*?$|![O|o]ok.*?$/;
+      let hiramCity = /^![F|f]all.*[H|h]iram.*?$|![H|h]iram.*[C|c]ity.*?$/;
+      let delphShip = /^![D|d]elph.*?$/;
+      let lusca = /^![L|l]usca.*?$/;
+      let reset = /^!.*[R|r]eset.*?$/;
+      let unknownCommand = /^!.*$/;
+
+      if (msg.content.match(redDragonKeep)) {
+        msg.channel.send('Red Drag Info');
+      } else if (msg.content.match(kadum)) {
+        msg.channel.send('Kadum Info');
+      } else if (msg.content.match(fishFest)) {
+        msg.channel.send('Mirage Isle Fish Fest Info');
+      } else if (msg.content.match(abyssal)) {
+        msg.channel.send('Abyssal Attack Info');
+      } else if (msg.content.match(archepassReset)) {
+        msg.channel.send('Archepass Reset Info');
+      } else if (msg.content.match(castleSiege)) {
+        msg.channel.send('Castle Siege Info');
+      } else if (msg.content.match(halcy)) {
+        msg.channel.send('Golden Plains Battle Info');
+      } else if (msg.content.match(hiramCity)) {
+        msg.channel.send('The Fall of Hiram City Info');
+      } else if (msg.content.match(delphShip)) {
+        msg.channel.send('Delphinad Ghost Ships Info');
+      } else if (msg.content.match(lusca)) {
+        msg.channel.send('Lusca Awakening Info');
+      } else if (msg.content.match(reset)) {
+        msg.channel.send('Daily Reset Info');
+      } else if (msg.content.match(unknownCommand)) {
+        msg.channel.send('Unknown command pls send halp');
+      };
   }   
 });
 
