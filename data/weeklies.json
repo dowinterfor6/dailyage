@@ -1,5 +1,5 @@
 {
-    "1":
+    "Red Dragon's Keep":
     {
         "Name": "Red Dragon's Keep",
         "Activity Duration (mins)": 60,
@@ -15,7 +15,7 @@
             "Sun": [15.5]
         }
     },
-    "2":
+    "Kadum":
     {
         "Name": "Kadum",
         "Activity Duration (mins)": 60,
@@ -31,7 +31,7 @@
             "Sun": [1, 15.5]
         }
     },
-    "3":
+    "Kraken":
     {
         "Name": "Kraken",
         "Activity Duration (mins)": 60,
@@ -41,7 +41,7 @@
 
         }
     },
-    "4":
+    "Leviathan":
     {
         "Name": "Leviathan",
         "Activity Duration (mins)": 60,
@@ -51,7 +51,7 @@
 
         }
     },
-    "5":
+    "Black Dragon":
     {
         "Name": "Black Dragon",
         "Activity Duration (mins)": 60,
@@ -61,7 +61,7 @@
 
         }
     },
-    "6":
+    "Mirage Isle Fish Fest":
     {
         "Name": "Mirage Isle Fish Fest",
         "Activity Duration (mins)": 60,
@@ -71,7 +71,7 @@
             "Sat": [17]
         }
     },
-    "7":
+    "Abyssal Attack":
     {
         "Name": "Abyssal Attack",
         "Activity Duration (mins)": 60,
@@ -83,7 +83,7 @@
             "Sat": [22.5]
         }
     },
-    "8":
+    "Archepass Reset":
     {
         "Name": "Archepass Reset",
         "Activity Duration (mins)": 0,
@@ -93,7 +93,7 @@
             "Sun": [0]
         }
     },
-    "9":
+    "Castle Siege":
     {
         "Name": "Castle Siege",
         "Activity Duration (mins)": 60,
