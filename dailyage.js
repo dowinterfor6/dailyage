@@ -5,6 +5,9 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const auth = require('./auth.json');
 
+const offsetTimeCoefficient = 4;
+const offsetTime = [0456, 1534];
+const offset = 319/30;
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -31,6 +34,8 @@ client.on('message', msg => {
     case '!help':
       msg.channel.send('Use !schedule to see the schedule!');
       break;
+    default: 
+      // TODO regex check 
   }   
 });
 
