@@ -25,8 +25,7 @@ client.on('message', msg => {
         discordDisplay.add(dailies[eventName], 'Daily');
       })
 
-
-      msg.reply(discordDisplay.show());
+      msg.channel.send(discordDisplay.show())
     }
 });
 
