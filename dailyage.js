@@ -1,5 +1,6 @@
 const weeklies = require('./data/weeklies.json');
 const dailies = require('./data/dailies.json');
+const inGame = require('./data/inGame.json');
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -48,30 +49,43 @@ client.on('message', msg => {
       let reset = /^!.*[R|r]eset.*?$/;
       let unknownCommand = /^!.*$/;
 
+      let outputInformation;
+
       if (msg.content.match(redDragonKeep)) {
-        msg.channel.send('Red Drag Info');
+        outputInformation = dataReducer("Red Dragon's Keep");
+        msg.channel.send(outputInformation);
       } else if (msg.content.match(kadum)) {
-        msg.channel.send('Kadum Info');
+        outputInformation = dataReducer("Kadum");
+        msg.channel.send(outputInformation);
       } else if (msg.content.match(fishFest)) {
-        msg.channel.send('Mirage Isle Fish Fest Info');
+        outputInformation = dataReducer("Mirage Isle Fish Fest");
+        msg.channel.send(outputInformation);
       } else if (msg.content.match(abyssal)) {
-        msg.channel.send('Abyssal Attack Info');
+        outputInformation = dataReducer("Abyssal Attack");
+        msg.channel.send(outputInformation);
       } else if (msg.content.match(archepassReset)) {
-        msg.channel.send('Archepass Reset Info');
+        outputInformation = dataReducer("Archepass Reset");
+        msg.channel.send(outputInformation);
       } else if (msg.content.match(castleSiege)) {
-        msg.channel.send('Castle Siege Info');
+        outputInformation = dataReducer("Castle Siege");
+        msg.channel.send(outputInformation);
       } else if (msg.content.match(halcy)) {
-        msg.channel.send('Golden Plains Battle Info');
+        outputInformation = dataReducer("Golden Plains Battle");
+        msg.channel.send(outputInformation);
       } else if (msg.content.match(hiramCity)) {
-        msg.channel.send('The Fall of Hiram City Info');
+        outputInformation = dataReducer("The Fall of Hiram City");
+        msg.channel.send(outputInformation);
       } else if (msg.content.match(delphShip)) {
-        msg.channel.send('Delphinad Ghost Ships Info');
+        outputInformation = dataReducer("Delphinad Ghost Ships");
+        msg.channel.send(outputInformation);
       } else if (msg.content.match(lusca)) {
-        msg.channel.send('Lusca Awakening Info');
+        outputInformation = dataReducer("Lusca Awakening");
+        msg.channel.send(outputInformation);
       } else if (msg.content.match(reset)) {
-        msg.channel.send('Daily Reset Info');
+        outputInformation = dataReducer("Daily Reset");
+        msg.channel.send(outputInformation);
       } else if (msg.content.match(unknownCommand)) {
-        msg.channel.send('Unknown command pls send halp');
+        msg.channel.send("Pls send halp");
       };
   }   
 });
@@ -98,7 +112,7 @@ class Display {
       if (type === "Weekly") {
         for (let [day, hours] of Object.entries(event["Times"])) {
           for (let hour of hours) {
-            let formattedTime = this.formatTime(hour);
+            let formattedTime = formatTime(hour);
             if (Object.keys(this.state[day]).includes(formattedTime)) {
               this.state[day][formattedTime].push(eventName);
             } else {
@@ -108,7 +122,7 @@ class Display {
         }
       } else if (type === "Daily") {
         for (let hour of event["Times"]) {
-          let formattedTime = this.formatTime(hour);
+          let formattedTime = formatTime(hour);
           for (let [day, hours] of Object.entries(this.state)) {
             if (Object.keys(hours).includes(formattedTime)) {
               this.state[day][formattedTime].push(eventName);
@@ -137,29 +151,61 @@ class Display {
 
     return output.join('');
   }
+}
 
-  formatTime(inputHour) {
-    let formattedDate = '';
+const formatTime = inputHour => {
+  let formattedDate = '';
 
-    let hour = Math.floor(inputHour);
-    let minutes = 60 * inputHour % hour;
+  let hour = Math.floor(inputHour);
+  let minutes = 60 * inputHour % hour;
 
-    if (hour < 10) {
-      formattedDate += '0' + hour;
-    } else {
-      formattedDate += hour;
-    }
-
-    if (minutes > 0) {
-      if (minutes < 10) {
-        formattedDate += '0' + minutes;
-      } else {
-        formattedDate += minutes;
-      }
-    } else {
-      formattedDate += '00';
-    }
-    
-    return formattedDate;
+  if (hour < 10) {
+    formattedDate += '0' + hour;
+  } else {
+    formattedDate += hour;
   }
+
+  if (minutes > 0) {
+    if (minutes < 10) {
+      formattedDate += '0' + minutes;
+    } else {
+      formattedDate += minutes;
+    }
+  } else {
+    formattedDate += '00';
+  }
+  
+  return formattedDate;
+}
+
+const dataReducer = eventName => {
+  if (weeklies[eventName]) {
+    return formatData(weeklies[eventName], "Weekly");
+  } else if (dailies[eventName]) {
+    return formatData(dailies[eventName], "Daily");
+  } else if (inGame[eventName]) {
+    return formatData(inGame[eventName], "InGame");
+  };
+  console.log("There's an error with the reducer!");
+};
+
+const formatData = (event, type) => {
+  let output = `\n${event["Name"]}\`\`\``;
+  let timesDisplay = [];
+  switch (type) {
+    case "Weekly":
+      for (let [day, times] of Object.entries(event["Times"])) {
+        let weeklyTimes = times.map(time => formatTime(time));
+        timesDisplay.push(day + " - " + weeklyTimes.join(', '));
+      }
+      break;
+    case "Daily":
+      let dailyTimes = event["Times"].map(time => formatTime(time));
+      timesDisplay.push('Daily - ' + dailyTimes.join(', '));
+      break;
+    case "InGame":
+      // TODO
+      break;
+  }
+  return output + timesDisplay.join('\n') + '\`\`\`';
 }
