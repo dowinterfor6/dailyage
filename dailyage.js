@@ -36,6 +36,7 @@ client.on('message', msg => {
       msg.channel.send('Use !schedule to see the schedule!');
       break;
     default: 
+    // TODO check for status as well as regex for commands
       let redDragonKeep = /^![r|R]ed.*[d|D]rag.*?$/;
       let kadum = /^![k|K]adum.*?$/;
       let fishFest = /^![M|m]irage.*[I|i]sle.*[F|f]ish.*[F|f]est.*?$|^![F|f]ish.*[F|f]est.*?$/;
@@ -157,7 +158,7 @@ const formatTime = inputHour => {
   let formattedDate = '';
 
   let hour = Math.floor(inputHour);
-  let minutes = 60 * (inputHour % hour);
+  let minutes = 60 * (inputHour - hour); 
 
   if (hour < 10) {
     formattedDate += '0' + hour;

@@ -28,8 +28,8 @@
         "Name": "Delphinad Ghost Ships",
         "Activity Duration (mins)": 60,
         "Opening Duration": 1,
-        "Status": false,
-        "Times": []
+        "Status": true,
+        "Times": [0.25]
     },
     "Lusca Awakening":
     {
