@@ -271,8 +271,16 @@ const findNextEvent = (event, type) => {
 
       nextEventHour = Math.floor(nextEventTimeDifference);
       nextEventMinute = (nextEventTimeDifference - nextEventHour) * 60;
-      nextEventDetail.push(formatTimePlurals(nextEventHour, 'hour'));
-      nextEventDetail.push(formatTimePlurals(Math.round(nextEventMinute), 'minute'))
+
+      hoursDiff = nextEventHour;
+      minutesDiff = Math.round(nextEventMinute);
+
+      if (hoursDiff) {
+        nextEventDetail.push(formatTimePlurals(hoursDiff, 'hour'));
+      } else if (minutesDiff) {
+        nextEventDetail.push(formatTimePlurals(minutesDiff, 'minute'))
+      };
+
       return nextEventDetail.join(' ');
     case "InGame":
       break;
