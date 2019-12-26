@@ -6,6 +6,9 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const auth = require('./auth.json');
 
+// TODO check if instanced or singleton
+let tzOffset = 0;
+
 const offsetTimeCoefficient = 4;
 const offsetTime = [0456, 1534];
 const offset = 319/30;
@@ -32,62 +35,79 @@ client.on('message', msg => {
 
       msg.channel.send(discordDisplay.show());
       break;
+    case '!setTimezone':
+      msg.channel.send('Use !setTimezone+# or !setTimezone-# to set the time zone to the appropriate UTC offset.')
+      msg.channel.send('```!setTimezone-8 // US West Coast \n!setTimezone+8 // Western Australia/China/Hong Kong```')
+      break;
     case '!help':
       msg.channel.send('Use !schedule to see the schedule!');
       break;
-    default: 
-    // TODO check for status as well as regex for commands
-      let redDragonKeep = /^![r|R]ed.*[d|D]rag.*?$/;
-      let kadum = /^![k|K]adum.*?$/;
-      let fishFest = /^![M|m]irage.*[I|i]sle.*[F|f]ish.*[F|f]est.*?$|^![F|f]ish.*[F|f]est.*?$/;
-      let abyssal = /^![A|a]byssal.*?$|![A|a][A|a].*?$/;
-      let archepassReset = /^!.*[P|p]ass.*[R|r]eset.*?$/;
-      let castleSiege = /^![C|c]astle.*?$/;
-      let halcy = /^![H|h]alcy.*?$|![G|g]old.*[P|p]lain.*?$|![O|o]ok.*?$/;
-      let hiramCity = /^![F|f]all.*[H|h]iram.*?$|![H|h]iram.*[C|c]ity.*?$/;
-      let delphShip = /^![D|d]elph.*?$/;
-      let lusca = /^![L|l]usca.*?$/;
-      let reset = /^!.*[R|r]eset.*?$/;
-      let unknownCommand = /^!.*$/;
+    default:
+      let setTimezoneCheck = /^!setTimezone.*$/;
+      if (msg.content.match(setTimezoneCheck)) {
+        let tzOffsetParse = msg.content.split("!setTimezone")[1];
+        // TODO error check
+        let tzOffsetCheck = /^[+|-][0-9]$/;
+        if (tzOffsetParse.match(tzOffsetCheck)) {
+          tzOffset = tzOffsetParse[0] === '+' ? parseInt(tzOffsetParse[1]) : -1 * parseInt(tzOffsetParse[1]);
+        } else {
+          msg.channel.send('Invalid UTC offset, please see the examples below.')
+          msg.channel.send('```!setTimezone-8 // US West Coast \n!setTimezone+8 // Western Australia/China/Hong Kong```')
+        }
+      } else {
+      // TODO check for status as well as regex for commands
+        let redDragonKeep = /^![r|R]ed.*[d|D]rag.*?$/;
+        let kadum = /^![k|K]adum.*?$/;
+        let fishFest = /^![M|m]irage.*[I|i]sle.*[F|f]ish.*[F|f]est.*?$|^![F|f]ish.*[F|f]est.*?$/;
+        let abyssal = /^![A|a]byssal.*?$|![A|a][A|a].*?$/;
+        let archepassReset = /^!.*[P|p]ass.*[R|r]eset.*?$/;
+        let castleSiege = /^![C|c]astle.*?$/;
+        let halcy = /^![H|h]alcy.*?$|![G|g]old.*[P|p]lain.*?$|![O|o]ok.*?$/;
+        let hiramCity = /^![F|f]all.*[H|h]iram.*?$|![H|h]iram.*[C|c]ity.*?$/;
+        let delphShip = /^![D|d]elph.*?$/;
+        let lusca = /^![L|l]usca.*?$/;
+        let reset = /^!.*[R|r]eset.*?$/;
+        let unknownCommand = /^!.*$/;
 
-      let outputInformation;
+        let outputInformation;
 
-      if (msg.content.match(redDragonKeep)) {
-        outputInformation = dataReducer("Red Dragon's Keep");
-        msg.channel.send(outputInformation);
-      } else if (msg.content.match(kadum)) {
-        outputInformation = dataReducer("Kadum");
-        msg.channel.send(outputInformation);
-      } else if (msg.content.match(fishFest)) {
-        outputInformation = dataReducer("Mirage Isle Fish Fest");
-        msg.channel.send(outputInformation);
-      } else if (msg.content.match(abyssal)) {
-        outputInformation = dataReducer("Abyssal Attack");
-        msg.channel.send(outputInformation);
-      } else if (msg.content.match(archepassReset)) {
-        outputInformation = dataReducer("Archepass Reset");
-        msg.channel.send(outputInformation);
-      } else if (msg.content.match(castleSiege)) {
-        outputInformation = dataReducer("Castle Siege");
-        msg.channel.send(outputInformation);
-      } else if (msg.content.match(halcy)) {
-        outputInformation = dataReducer("Golden Plains Battle");
-        msg.channel.send(outputInformation);
-      } else if (msg.content.match(hiramCity)) {
-        outputInformation = dataReducer("The Fall of Hiram City");
-        msg.channel.send(outputInformation);
-      } else if (msg.content.match(delphShip)) {
-        outputInformation = dataReducer("Delphinad Ghost Ships");
-        msg.channel.send(outputInformation);
-      } else if (msg.content.match(lusca)) {
-        outputInformation = dataReducer("Lusca Awakening");
-        msg.channel.send(outputInformation);
-      } else if (msg.content.match(reset)) {
-        outputInformation = dataReducer("Daily Reset");
-        msg.channel.send(outputInformation);
-      } else if (msg.content.match(unknownCommand)) {
-        msg.channel.send("Pls send halp");
-      };
+        if (msg.content.match(redDragonKeep)) {
+          outputInformation = dataReducer("Red Dragon's Keep");
+          msg.channel.send(outputInformation);
+        } else if (msg.content.match(kadum)) {
+          outputInformation = dataReducer("Kadum");
+          msg.channel.send(outputInformation);
+        } else if (msg.content.match(fishFest)) {
+          outputInformation = dataReducer("Mirage Isle Fish Fest");
+          msg.channel.send(outputInformation);
+        } else if (msg.content.match(abyssal)) {
+          outputInformation = dataReducer("Abyssal Attack");
+          msg.channel.send(outputInformation);
+        } else if (msg.content.match(archepassReset)) {
+          outputInformation = dataReducer("Archepass Reset");
+          msg.channel.send(outputInformation);
+        } else if (msg.content.match(castleSiege)) {
+          outputInformation = dataReducer("Castle Siege");
+          msg.channel.send(outputInformation);
+        } else if (msg.content.match(halcy)) {
+          outputInformation = dataReducer("Golden Plains Battle");
+          msg.channel.send(outputInformation);
+        } else if (msg.content.match(hiramCity)) {
+          outputInformation = dataReducer("The Fall of Hiram City");
+          msg.channel.send(outputInformation);
+        } else if (msg.content.match(delphShip)) {
+          outputInformation = dataReducer("Delphinad Ghost Ships");
+          msg.channel.send(outputInformation);
+        } else if (msg.content.match(lusca)) {
+          outputInformation = dataReducer("Lusca Awakening");
+          msg.channel.send(outputInformation);
+        } else if (msg.content.match(reset)) {
+          outputInformation = dataReducer("Daily Reset");
+          msg.channel.send(outputInformation);
+        } else if (msg.content.match(unknownCommand)) {
+          msg.channel.send("Pls send halp");
+        };
+      }
   }   
 });
 
@@ -162,8 +182,9 @@ class Display {
 const formatTime = inputHour => {
   let formattedDate = '';
 
-  let hour = Math.floor(inputHour);
-  let minutes = 60 * (inputHour - hour); 
+  let offsetHour = Math.floor(inputHour) + tzOffset;
+  let hour = offsetHour >= 0 ? offsetHour % 24 : 24 + offsetHour;
+  let minutes = 60 * (inputHour - Math.floor(inputHour)); 
 
   if (hour < 10) {
     formattedDate += '0' + hour;
