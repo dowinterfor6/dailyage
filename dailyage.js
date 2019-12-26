@@ -142,9 +142,14 @@ class Display {
     let output = [];
     for (let [day, schedule] of Object.entries(this.state)) {      
       let scheduleDisplay = `\n${day}\`\`\``;
-      for (let [time, event] of Object.entries(schedule)) {
+
+      let sortedTimes = Object.keys(schedule).sort((a, b) => parseInt(a) > parseInt(b));
+
+      sortedTimes.forEach(time => {
+        let event = schedule[time];
         scheduleDisplay += time + ' ' + event.join('\n     ') + '\n';
-      }
+      })
+
       scheduleDisplay += '```';
 
       output.push(scheduleDisplay);
