@@ -219,7 +219,10 @@ const findNextEvent = (event, type) => {
     nextEventTimeArr, 
     nextEventTimeDifference, 
     nextEventHour, 
-    nextEventMinute;
+    nextEventMinute,
+    daysDiff,
+    hoursDiff,
+    minutesDiff;
   let currentDate = new Date();
   let currentHour = currentDate.getUTCHours() + (currentDate.getUTCMinutes() / 60);
   let currentDay = currentDate.getUTCDay();
@@ -232,7 +235,7 @@ const findNextEvent = (event, type) => {
       nextEventTimeArr = event["Times"][daysArr[currentDay]];
 
       if (nextEventTimeArr && nextEventTimeArr.filter(time => time > currentHour).length > 0) {
-        nextEventTimeDifference = event["Times"][0] - currentHour;
+        nextEventTimeDifference = nextEventTimeArr[0] - currentHour;
       } else {
         tryNextDay++;
         while (!event["Times"][daysArr[tryNextDay % 7]]) {
@@ -243,9 +246,18 @@ const findNextEvent = (event, type) => {
 
       nextEventHour = Math.floor(nextEventTimeDifference);
       nextEventMinute = (nextEventTimeDifference - nextEventHour) * 60;
-      nextEventDetail.push(formatTimePlurals(tryNextDay - currentDay, 'day'));
-      nextEventDetail.push(formatTimePlurals(nextEventHour, 'hour'));
-      nextEventDetail.push(formatTimePlurals(Math.round(nextEventMinute), 'minute'))
+
+      daysDiff = tryNextDay - currentDay;
+      hoursDiff = nextEventHour;
+      minutesDiff = Math.round(nextEventMinute);
+
+      if (daysDiff) {
+        nextEventDetail.push(formatTimePlurals(daysDiff, 'day'));
+      } else if (hoursDiff) {
+        nextEventDetail.push(formatTimePlurals(hoursDiff, 'hour'));
+      } else if (minutesDiff) {
+        nextEventDetail.push(formatTimePlurals(minutesDiff, 'minute'))
+      };
 
       return nextEventDetail.join(' ');
     case "Daily":
