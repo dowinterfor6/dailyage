@@ -35,6 +35,19 @@ client.on('message', msg => {
 
       msg.channel.send(discordDisplay.show());
       break;
+    case '!timezone':
+      let tzDisplayMessage = "The current configured time zone is UTC";
+
+      if (tzOffset === 0) {
+        msg.channel.send(tzDisplayMessage + ".");
+      } else if (tzOffset > 0) {
+        msg.channel.send(tzDisplayMessage + `+${tzOffset}.`);
+      } else if (tzOffset < 0) {
+        msg.channel.send(tzDisplayMessage + `${tzOffset}.`);
+      } else {
+        msg.channel.send("Error?");
+      }
+      break;
     case '!setTimezone':
       msg.channel.send('Use !setTimezone+# or !setTimezone-# to set the time zone to the appropriate UTC offset.')
       msg.channel.send('```!setTimezone-8 // US West Coast \n!setTimezone+8 // Western Australia/China/Hong Kong```')
@@ -50,6 +63,16 @@ client.on('message', msg => {
         let tzOffsetCheck = /^[+|-][0-9]$/;
         if (tzOffsetParse.match(tzOffsetCheck)) {
           tzOffset = tzOffsetParse[0] === '+' ? parseInt(tzOffsetParse[1]) : -1 * parseInt(tzOffsetParse[1]);
+          let tzChangeMessage = "Successfully changed time zone to UTC";
+          if (tzOffset === 0) {
+            msg.channel.send(tzChangeMessage + ".");
+          } else if (tzOffset > 0) {
+            msg.channel.send(tzChangeMessage + `+${tzOffset}.`);
+          } else if (tzOffset < 0) {
+            msg.channel.send(tzChangeMessage + `${tzOffset}.`);
+          } else {
+            msg.channel.send("Error?");
+          }
         } else {
           msg.channel.send('Invalid UTC offset, please see the examples below.')
           msg.channel.send('```!setTimezone-8 // US West Coast \n!setTimezone+8 // Western Australia/China/Hong Kong```')
